@@ -17,17 +17,14 @@ const todoList = [{
 },
 ];
 
-const listDiv = document.getElementById('todo-list');
+const listDiv = document.querySelector('.todoList');
 
 const showTasks = () => {
   for (let i = 0; i < todoList.length; i += 1) {
     const task = todoList[i];
-    const list = ` <li class="task" id="${task.index}">
-    <div>
+    const list = ` <li class="todo" id="${task.index}">
       <input type="checkbox" class="check" id="list-checkbox" name="list-checkbox">
-      <label>${task.description}</label>
-    </div>
-    <button type="submit"><i class="fa fa-ellipsis-v"></i></button>
+      ${task.description}<span class="icon"><i class="fa fa-ellipsis-v"></i></span>
   </li>`;
 
     listDiv.innerHTML += list;

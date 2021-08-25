@@ -9,24 +9,21 @@
 </head>
 
 <body>
-    <div class="list-wrapper">
-        <h1>Todo list app</h1>
-
-        <div class="list-card">
-            <h2>Today's To do</h2>
+    <div class="wrapper">
+        <div class="top">
+            <span>Today's todo list</span>
             <button type="submit"><i class="fa fa-refresh"></i></button>
         </div>
-
-        <!--Add to do-->
-        <form id="add-form">
-            <input type="text" placeholder="Add to your list..." class="text">
+        <div class="addField">
+            <input type="text" placeholder="Add your todo ...">
             <button type="submit"><i class="fa fa-reply"></i></button>
-        </form>
-
-        <ul id="todo-list">
-
+        </div>
+        <ul class="todoList">
+            <!-- data -->
         </ul>
-        <a href="#" class="clear-completed">Clear all completed</a>
+        <div class="footer">
+            <button type="submit">Clear all completed</button>
+        </div>
     </div>
 </body>
 
