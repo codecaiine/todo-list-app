@@ -3,7 +3,7 @@ import './style.css';
 const todoList = [{
   description: 'Go to the market',
   completed: false,
-  index: 1,
+  index: 4,
 },
 {
   description: 'Wash my clothes',
@@ -13,13 +13,16 @@ const todoList = [{
 {
   description: 'Call my daddy',
   completed: false,
-  index: 3,
+  index: 1,
 },
 ];
+
+todoList.sort((a, b) => a.index - b.index);
 
 const listDiv = document.querySelector('.todoList');
 
 const showTasks = () => {
+  listDiv.innerHTML = '';
   for (let i = 0; i < todoList.length; i += 1) {
     const task = todoList[i];
     const list = ` <li class="todo" id="${task.index}">
