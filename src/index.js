@@ -24,7 +24,7 @@ const showTasks = () => {
     const task = todoList[i];
     const list = ` <li class="todo" id="${task.index}">
       <input type="checkbox" class="check" id="list-checkbox" name="list-checkbox">
-      ${task.description}<span class="icon"><i class="fa fa-ellipsis-v"></i></span>
+      ${task.description}<span class="icon"><i class="fa fa-ellipsis-v"></i></span> <span class="btn-del"><i class="fa fa-trash"></i></span>
   </li>`;
 
     listDiv.innerHTML += list;

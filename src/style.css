@@ -130,22 +130,13 @@ body {
   font-size: 17px;
 }
 
-.todoList li input {
-  padding-right: 10px;
-}
-
-.addField input:focus {
-  border-color: #8e49e8;
-}
-
-.addField button:hover,
-.footer button:hover {
-  background: #721ce3;
-}
-
 .inputField button.active {
   opacity: 1;
   pointer-events: auto;
+}
+
+.check {
+  border-bottom: 1px solid #721ce3;
 }
 
 .wrapper .todoList {
@@ -165,6 +156,17 @@ body {
 
 .todoList li .icon {
   position: absolute;
+  right: 0;
+  top: 5px;
+  width: 45px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 15px;
+  border-radius: 0 3px 3px 0;
+}
+
+.todoList li .btn-del {
+  position: absolute;
   right: -45px;
   top: 50%;
   transform: translateY(-50%);
@@ -178,7 +180,7 @@ body {
   transition: all 0.2s ease;
 }
 
-.todoList li:hover .icon {
+.todoList li:hover .btn-del {
   right: 0;
 }
 
