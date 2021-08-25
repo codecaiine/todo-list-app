@@ -1,13 +1,37 @@
-import _ from 'lodash';
 import './style.css';
 
-function component() {
-  const element = document.createElement('div');
+const todoList = [{
+  description: 'Go to the market',
+  completed: false,
+  index: 1,
+},
+{
+  description: 'Wash my clothes',
+  completed: false,
+  index: 2,
+},
+{
+  description: 'Call my daddy',
+  completed: false,
+  index: 3,
+},
+];
 
-  // Lodash, currently included via a script, is required for this line to work
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+const listDiv = document.getElementById('todo-list');
 
-  return element;
-}
+const showTasks = () => {
+  for (let i = 0; i < todoList.length; i += 1) {
+    const task = todoList[i];
+    const list = ` <li class="task" id="${task.index}">
+    <div>
+      <input type="checkbox" class="check" id="list-checkbox" name="list-checkbox">
+      <label>${task.description}</label>
+    </div>
+    <button type="submit"><i class="fa fa-ellipsis-v"></i></button>
+  </li>`;
 
-document.body.appendChild(component());
+    listDiv.innerHTML += list;
+  }
+};
+
+window.onload = showTasks;
