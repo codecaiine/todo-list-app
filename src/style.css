@@ -135,10 +135,6 @@ body {
   pointer-events: auto;
 }
 
-.check {
-  border-bottom: 1px solid #721ce3;
-}
-
 .wrapper .todoList {
   max-height: 250px;
   overflow-y: auto;
@@ -170,7 +166,6 @@ body {
   right: -45px;
   top: 50%;
   transform: translateY(-50%);
-  background: #fff;
   width: 45px;
   text-align: center;
   color: #333;
@@ -182,6 +177,25 @@ body {
 
 .todoList li:hover .btn-del {
   right: 0;
+}
+
+ul li.checked {
+  background: #888;
+  color: #fff;
+  text-decoration: line-through;
+}
+
+ul li.checked::before {
+  content: '';
+  position: absolute;
+  border-color: #fff;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
 }
 
 .wrapper .footer {

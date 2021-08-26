@@ -1,9 +1,9 @@
 # Building a To-do list App
 
-This project contains a to-do list project where tasks can be added, marked as completed and deleted
+In this project, you will add some functionality to your application to make it interactive. The user will also be able to mark task completion by selecting the corresponding checkbox (or undo it by unchecking the checkbox). The updated tasks list will be stored in local storage.
 
 
-![screenshot](./src/demo_todo.PNG)
+![screenshot](./src/demo-line-todo.PNG)
 
  
 
@@ -28,9 +28,17 @@ Run the command below from the Terminal:
 
       git clone <URL> in your terminal
 
-	  cd microverse_portfolio
+	  cd todo-list-app
 
-	  start index.html
+	  npm install
+
+	  npm run build
+
+	  npm run start
+
+	  npx hint
+
+	  npx stylelint "**/*.{css,scss}"
 
 
 
