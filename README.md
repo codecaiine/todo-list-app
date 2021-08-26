@@ -28,9 +28,17 @@ Run the command below from the Terminal:
 
       git clone <URL> in your terminal
 
-	  cd microverse_portfolio
+	  cd todo-list-app
 
-	  start index.html
+	  npm install
+
+	  npm run build
+
+	  npm run start
+
+	  npx hint
+
+	  npx stylelint "**/*.{css,scss}"
 
 
 
