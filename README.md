@@ -1,9 +1,9 @@
-# Building a To-do list App
+# Building a To-do list App (CRUD)
 
-In this project, you will add some functionality to your application to make it interactive. The user will also be able to mark task completion by selecting the corresponding checkbox (or undo it by unchecking the checkbox). The updated tasks list will be stored in local storage.
+In this project, you will implement the CRUD (create, update, delete) methods. All the elements of the user interface will be fully functional and your application will be completed.
 
 
-![screenshot](./src/demo-line-todo.PNG)
+![screenshot](./src/demo-rm.PNG)
 
  
 
@@ -65,7 +65,7 @@ Give a ⭐️ if you like this project!
 ## Acknowledgments
 
 - Thanks to Microverse
-- Dammy
+- Adedamola Shittu
 
 ## 📝 License
 
