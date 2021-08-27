@@ -1,4 +1,4 @@
-# Building a To-do list App
+# Building a To-do list App (CRUD)
 
 In this project, you will implement the CRUD (create, update, delete) methods. All the elements of the user interface will be fully functional and your application will be completed.
 
