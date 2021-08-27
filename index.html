@@ -9,22 +9,32 @@
 <script defer src="/todo-list-app/main.js"></script></head>
 
 <body>
-    <div class="wrapper">
-        <div class="top">
-            <span>Today's todo list</span>
-            <button type="submit"><i class="fa fa-refresh"></i></button>
+
+    <div class="wrapper-container">
+        <div class="wrapper">
+            <div class="top">
+                <h2>Today's To Do</h2>
+                <button type="submit"><i class="fas fa-sync fa-xs"></i></button>
+            </div>
+
+
+            <form id="form">
+                <input type="text" placeholder="Add to your list..." class="text">
+                <button type="submit"><i class="fa fa-reply"></i></button>
+            </form>
+
+            <ul id="todoList">
+
+            </ul>
+
+            <footer>
+                <span class="clear-completed">Clear all completed</span>
+            </footer>
+
         </div>
-        <div class="addField">
-            <input type="text" placeholder="Add your todo ...">
-            <button type="submit"><i class="fa fa-reply"></i></button>
-        </div>
-        <ul class="todoList">
-            <!-- data -->
-        </ul>
-        <div class="footer">
-            <button type="submit">Clear all completed</button>
-        </div>
+
     </div>
+
 </body>
 
 </html>
