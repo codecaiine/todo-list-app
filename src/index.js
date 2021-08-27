@@ -1,68 +1,57 @@
+/* eslint-disable import/no-cycle */
 import './style.css';
-import updateStaus from './status.js';
+import showTasks from './showTodos.js';
+import { saveTodoInLocalStorage } from './setLocalStorage.js';
+import getTasksFromLocalStorage from './getTodos.js';
+import removeTodo from './remove.js';
+import removeCompletedTasks from './clearTodos.js';
 
-const todoList = [{
-  description: 'Go to the market',
-  completed: false,
-  index: 4,
-},
-{
-  description: 'Wash my clothes',
-  completed: false,
-  index: 2,
-},
-{
-  description: 'Call my daddy',
-  completed: false,
-  index: 1,
-},
-];
-todoList.sort((a, b) => a.index - b.index);
+const input = document.querySelector('.text');
+const form = document.getElementById('form');
+const removeCompleted = document.querySelector('.clear-completed');
 
-// Set up my local storage
-const myLocalStorage = (items) => {
-  localStorage.setItem('myList', JSON.stringify(items));
-};
-const getTasksFromLocalStorage = () => JSON.parse(localStorage.getItem('myList'));
+function clearInput() {
+  input.value = '';
+}
 
-const listDiv = document.querySelector('.todoList');
-const showList = () => {
-  const tList = getTasksFromLocalStorage();
-  listDiv.innerHTML = '';
-  for (let i = 0; i < tList.length; i += 1) {
-    const task = tList[i];
-    const list = ` <li class="todo" id="${task.index}">
-      <input type="checkbox" class="check" id="list-checkbox" name="list-checkbox">
-      ${task.description}<span class="icon"><i class="fa fa-ellipsis-v"></i></span> <span class="btn-del"><i class="fa fa-trash"></i></span>
-  </li>`;
+// Add Task
 
-    listDiv.innerHTML += list;
+const addTodoTask = (e) => {
+  const tasks = getTasksFromLocalStorage();
+  e.preventDefault();
+
+  if (input.value === '') {
+    return;
   }
 
-  const check = document.querySelectorAll('.check');
-  for (let j = 0; j < check.length; j += 1) {
-    check[j].addEventListener('change', (e) => {
-      if (check[j].checked) {
-        check[j].completed = true;
-        updateStaus(e.target, tList[j]);
-        e.target.parentNode.classList.toggle('checked');
-        myLocalStorage(tList);
-      } else {
-        check[j].completed = false;
-        updateStaus(e.target, tList[j]);
-        e.target.parentNode.classList.remove('checked');
-        myLocalStorage(tList);
-      }
-    });
+  const todo = {
+    description: input.value,
+    completed: false,
+    index: tasks.length + 1,
+  };
+
+  clearInput();
+  saveTodoInLocalStorage(todo);
+  showTasks();
+};
+
+const setIndex = (tasks) => {
+  for (let i = 0; i < tasks.length; i += 1) {
+    tasks[i].index = i + 1;
   }
 };
 
-// Get Tasks From Local Storage
-window.onload = () => {
-  const getTodo = getTasksFromLocalStorage();
+form.addEventListener('submit', addTodoTask);
 
-  if (getTodo === null) {
-    myLocalStorage(todoList);
+const myTodoList = document.getElementById('todoList');
+myTodoList.addEventListener('click', (event) => {
+  if (event.target.classList.contains('delete-task')) {
+    const listKey = event.target.parentElement.parentElement.dataset.key;
+    removeTodo(listKey);
   }
-  showList();
-};
+});
+removeCompleted.addEventListener('click', removeCompletedTasks);
+
+showTasks();
+
+export default setIndex;
