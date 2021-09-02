@@ -66,6 +66,7 @@ Give a ⭐️ if you like this project!
 
 - Thanks to Microverse
 - Adedamola Shittu
+- Zeenat Lawal
 
 ## 📝 License
 

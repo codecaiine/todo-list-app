@@ -1,165 +1,89 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-
 body {
-  width: 100%;
-  height: 100vh;
-  padding: 10px;
-  background: #f6f6f6;
+  background-color: #f1f2f5;
 }
 
-.wrapper-container {
-  height: 100vh;
+.card {
+  background-color: white;
+  width: 45%;
+  margin: 100px auto 0 auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.list-head,
+.list-item {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-h1 {
-  font-size: 60px;
-  margin-bottom: 30px;
-  color: brown;
+#inputList {
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  font-style: italic;
+  opacity: 0.6;
+  width: 100%;
+}
+
+.inputEdit {
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  font-style: italic;
+  opacity: 0.8;
+  padding: 10px;
+  width: 100%;
+  background-color: rgb(240, 218, 190);
+}
+
+.description {
+  padding: 0 10px;
+}
+
+.fa-level-down-alt {
+  transform: rotate(90deg);
+  font-size: 12px;
+}
+
+#main-list {
+  color: black;
+  list-style: none;
+  padding: 0;
+}
+
+p,
+ul {
+  margin: 0;
+}
+
+.list-input {
+  display: flex;
+}
+
+input {
+  margin-right: 10px;
+}
+
+.clear-all {
+  background-color: #f1f2f5;
+  padding: 15px;
   text-align: center;
 }
 
-.wrapper {
-  background: #fff;
-  max-width: 40%;
-  width: 100%;
-  margin: 120px auto;
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-}
-
-.todo-title,
-#form,
-.task {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #dadadc;
-  min-height: 30px;
-  max-height: 70px;
-  width: 95%;
-  margin: 0 auto;
-  align-items: center;
-  gap: 15px;
-  padding: 0 5px;
-}
-
-button,
-.text,
-label {
-  appearance: none;
-  outline: none;
-  border: none;
-  background-color: inherit;
-}
-
-label {
-  padding-right: 80px;
-}
-
-label:hover {
-  cursor: text;
-}
-
-#todoList li label {
-  color: #545862;
-  font-size: 15px;
-  font-weight: 400;
-}
-
-.wrapper .top h2 {
-  width: 100%;
-  display: flex;
-  height: 55px;
-  padding: 20px 15px;
-  font-size: 17px;
-  color: #333;
-  font-weight: 400;
-  border-bottom: 1px solid #f2f2f2;
-}
-
-button i {
-  color: #c3c4c7;
-  transition: 250ms ease-in-out;
-}
-
-button i:hover {
-  color: brown;
-  cursor: pointer;
-}
-
-.text {
-  font-size: 14px;
-  caret-color: red;
-  color: #545862;
-  width: 70%;
-}
-
-.text::placeholder {
-  font-style: italic;
-  opacity: 0.5;
-}
-
-#todoList {
-  margin: 0;
-  padding: 0;
-}
-
-#todoList li {
-  position: relative;
-  list-style: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  padding: 13px 15px;
-  cursor: default;
-  overflow: hidden;
-  word-wrap: break-word;
-}
-
-#todoList li input[type="checkbox"] {
-  margin-right: 5px;
-  outline: 0;
-}
-
-#todoList .ellipsis i:hover {
-  cursor: move;
-}
-
-.clear-completed {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
+.fas,
+.far,
+.clear-all a {
   text-decoration: none;
-  color: #000;
-  opacity: 0.8;
-  height: 30px;
-  transition: 300ms;
-  font-size: 15px;
+  color: black;
+  opacity: 0.4;
 }
 
-.clear-completed:hover {
+.fas:hover,
+.far:hover,
+.clear-all a:hover {
   text-decoration: underline;
-  opacity: 1;
-  color: blue;
-}
-
-.box:checked + .form-label {
-  text-decoration: line-through;
-  opacity: 0.6;
-}
-
-.wrapper footer {
-  display: flex;
-  height: 50px;
-  align-items: center;
-  justify-content: center;
-  background-color: #cdced0;
+  color: black;
+  opacity: 0.8;
 }
