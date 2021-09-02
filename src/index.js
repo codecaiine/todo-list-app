@@ -1,57 +1,93 @@
-/* eslint-disable import/no-cycle */
+/* eslint-disable no-loop-func */
 import './style.css';
-import showTasks from './showTodos.js';
-import { saveTodoInLocalStorage } from './setLocalStorage.js';
-import getTasksFromLocalStorage from './getTodos.js';
-import removeTodo from './remove.js';
-import removeCompletedTasks from './clearTodos.js';
+import status from './status.js';
+import {
+  addTodo,
+  editTodo,
+  removeTodo,
+  clearChecked,
+} from './addAndRemove.js';
 
-const input = document.querySelector('.text');
-const form = document.getElementById('form');
-const removeCompleted = document.querySelector('.clear-completed');
+const mainList = document.getElementById('main-list');
+const clearAll = document.getElementById('clear');
 
-function clearInput() {
-  input.value = '';
+let todos = [];
+
+// Save to local storage
+function saveToStorage(taskArray) {
+  localStorage.setItem('tasks', JSON.stringify(taskArray));
 }
 
-// Add Task
+// Display Tasks
+function displayTasks() {
+  mainList.innerHTML = '';
+  todos.forEach((myTask) => {
+    const content = `<div class="list-input"><input type="checkbox"> <p class="description">${myTask.description}</p></div><span><i class="far fa-trash-alt"></i></span>`;
 
-const addTodoTask = (e) => {
-  const tasks = getTasksFromLocalStorage();
-  e.preventDefault();
+    const listItem = document.createElement('li');
+    listItem.innerHTML = `${content}`;
+    listItem.className = 'list-item';
+    mainList.appendChild(listItem);
 
-  if (input.value === '') {
-    return;
-  }
+    const listInput = listItem.firstChild;
+    const checkbox = listInput.firstChild;
+    const para = listInput.lastChild;
+    const trashIcon = listInput.nextSibling.firstChild;
 
-  const todo = {
-    description: input.value,
-    completed: false,
-    index: tasks.length + 1,
-  };
+    // Update checkbox status
+    checkbox.checked = myTask.completed;
+    checkbox.addEventListener('change', () => {
+      status(checkbox, myTask);
+      saveToStorage(todos);
+    });
 
-  clearInput();
-  saveTodoInLocalStorage(todo);
-  showTasks();
+    // Edit task
+    para.addEventListener('dblclick', () => {
+      para.setAttribute('contenteditable', 'true');
+      para.parentElement.classList.add('inputEdit');
+      editTodo(para, myTask, todos);
+    });
+
+    trashIcon.addEventListener('click', () => {
+      removeTodo(todos, myTask);
+      displayTasks();
+      window.location.reload();
+    });
+  });
+}
+
+clearAll.addEventListener('click', () => {
+  clearChecked(todos);
+  window.location.reload();
+});
+
+// Add new task with enter icon
+const enterBtn = document.getElementById('enter');
+enterBtn.onclick = () => {
+  addTodo(todos);
+  displayTasks();
 };
 
-const setIndex = (tasks) => {
-  for (let i = 0; i < tasks.length; i += 1) {
-    tasks[i].index = i + 1;
-  }
-};
-
-form.addEventListener('submit', addTodoTask);
-
-const myTodoList = document.getElementById('todoList');
-myTodoList.addEventListener('click', (event) => {
-  if (event.target.classList.contains('delete-task')) {
-    const listKey = event.target.parentElement.parentElement.dataset.key;
-    removeTodo(listKey);
+// Add new task with enter keypress
+const inputList = document.getElementById('inputList');
+inputList.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    addTodo(todos);
+    displayTasks();
   }
 });
-removeCompleted.addEventListener('click', removeCompletedTasks);
 
-showTasks();
+// Get from local storage
+function getFromStorage() {
+  const local = JSON.parse(localStorage.getItem('tasks'));
+  if (local) {
+    todos = local;
+  }
+  if (todos.length === 0) {
+    mainList.innerHTML = '<li class="list-item"><div class="list-input"><p>To-Do List is empty.</p></div></li>';
+  } else {
+    displayTasks();
+  }
+}
 
-export default setIndex;
+window.onload = getFromStorage();

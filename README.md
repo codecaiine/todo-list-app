@@ -26,20 +26,14 @@ To get a local copy up and running follow these simple steps.
 
 Run the command below from the Terminal:
 
-      git clone <URL> in your terminal
-
-	  cd todo-list-app
-
-	  npm install
-
-	  npm run build
-
-	  npm run start
-
-	  npx hint
-
-	  npx stylelint "**/*.{css,scss}"
-
+      .  Open your terminal or command line
+      .  Run git clone and paste the link
+      .  Open the folder with your code editor
+      .  Create a branch to work on
+      .  Run npm install
+      .  Run npm run build
+      .  Run npm run start to launch the server.
+      .  Run npm run test to run the test cases.
 
 
 ## Authors
@@ -50,6 +44,12 @@ Run the command below from the Terminal:
 - GitHub: [@codecaiine](https://github.com/codecaiine)
 - Twitter: [@yannicknaka](https://twitter.com/yannicknaka)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/yannick-no%C3%ABl-aka/)
+
+👤 **Kossi-Stack**
+
+- Location: Togo
+- GitHub: [@githubhandle](https://github.com/Kossi-stack/Mobile_Version_Skeleton)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/kossifioklou2406/)
 
 
 ## 🤝 Contributing
@@ -65,7 +65,10 @@ Give a ⭐️ if you like this project!
 ## Acknowledgments
 
 - Thanks to Microverse
+- Kossi Fioklou
+- Yannick AKA
 - Adedamola Shittu
+- Zeenat Lawal
 
 ## 📝 License
 
