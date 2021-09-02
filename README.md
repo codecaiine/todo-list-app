@@ -1,9 +1,9 @@
-# Building a To-do list App (CRUD)
+# Testing To Do list: part 1
 
-In this project, you will implement the CRUD (create, update, delete) methods. All the elements of the user interface will be fully functional and your application will be completed.
+In this project you will write unit tests for the To Do list application. The testing project has been divided into two parts. In part 1 you will test functions responsible for adding and deleting list items. 
 
 
-![screenshot](./src/demo-rm.PNG)
+![screenshot](./src/demoiii.PNG)
 
  
 
@@ -26,14 +26,14 @@ To get a local copy up and running follow these simple steps.
 
 Run the command below from the Terminal:
 
-      .  Open your terminal or command line
-      .  Run git clone and paste the link
-      .  Open the folder with your code editor
-      .  Create a branch to work on
-      .  Run npm install
-      .  Run npm run build
-      .  Run npm run start to launch the server.
-      .  Run npm run test to run the test cases.
+.  Open your terminal or command line
+.  Run git clone and paste the link
+.  Open the folder with your code editor
+.  Create a branch to work on
+.  Run npm install
+.  Run npm run build
+.  Run npm run start to launch the server.
+.  Run npm run test to run the test cases.
 
 
 ## Authors
