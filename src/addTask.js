@@ -1,8 +1,8 @@
 /* eslint-disable import/no-cycle */
 import { saveStorage, getStorage } from './storage.js';
-import populateList from './index.js';
+import showTasks from './index.js';
 
-const addTodo = (input) => {
+const addTask = (input) => {
   const taskList = getStorage();
   const task = {
     index: taskList.length + 1,
@@ -14,8 +14,8 @@ const addTodo = (input) => {
 
   saveStorage(taskList);
   input.value = '';
-  populateList(taskList);
+  showTasks(taskList);
   return task;
 };
 
-export default addTodo;
+export default addTask;
