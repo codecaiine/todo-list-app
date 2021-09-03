@@ -1,9 +1,13 @@
-function status(checkbox, tasklist) {
-  if (checkbox.checked) {
-    tasklist.completed = true;
-  } else {
-    tasklist.completed = false;
-  }
-}
+/* eslint-disable import/no-cycle */
+import { saveStorage, getStorage } from './storage.js';
 
-export default status;
+const trashCompleted = () => {
+  const storedTasks = getStorage();
+
+  const uncompletedTask = storedTasks.filter(
+    (task) => task.completed === false,
+  );
+  saveStorage(uncompletedTask);
+};
+
+export default trashCompleted;

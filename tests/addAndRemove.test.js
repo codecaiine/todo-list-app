@@ -1,60 +1,56 @@
 /**
  * @jest-environment jsdom
  */
-import { addTodo, removeTodo } from '../src/addAndRemove.js';
 
-describe('adding a new todo list', () => {
-  document.body.innerHTML = '<input type="text" placeholder="Add to your list..." id="inputList">';
-  const inputList = document.getElementById('inputList');
-  inputList.value = 'Kossi';
-  const todos = [];
+import trashTask from '../src/removeTask.js';
+import addTask from '../src/addTask.js';
+import { getStorage, saveStorage } from '../src/storage.js';
 
-  test('Add two new tasks to the list', () => {
-    addTodo(todos);
-    addTodo(todos);
-    expect(todos).toHaveLength(1);
+jest.mock('../src/storage.js');
+jest.mock('../src/index.js');
+const newTodoInput = document.createElement('input');
+newTodoInput.type = 'text';
+newTodoInput.value = 'read a book';
+
+describe('Testing the addTask function', () => {
+  test('test the function addList', () => {
+    saveStorage([]);
+    expect(addTask(newTodoInput)).toEqual({
+      description: 'read a book',
+      completed: false,
+      index: 1,
+    });
   });
 
-  test('Check description of first task', () => {
-    expect(todos[0].description).toBe('Kossi');
+  test('Test adding and getting items from the storage ', () => {
+    const newTodoInput = document.createElement('input');
+    newTodoInput.type = 'text';
+    newTodoInput.value = 'watch a movie';
+    saveStorage([]);
+    addTask(newTodoInput);
+    expect(getStorage()).toEqual([{
+      description: 'watch a movie',
+      completed: false,
+      index: 1,
+    }]);
   });
 
-  test('Check status of first task', () => {
-    expect(todos[0].completed).toBe(false);
-  });
-
-  test('Check index of second task', () => {
-    expect(todos[0].index).toBe(1);
+  test('Test creating the elements "Dom" after adding new tasks', () => {
+    saveStorage([]);
+    addTask(newTodoInput);
+    addTask(newTodoInput);
+    addTask(newTodoInput);
+    const items = Array.from(document.querySelectorAll('.list-item')).length;
+    expect(items).toBe(3);
   });
 });
 
-describe('deleting a task from the list', () => {
-  const todos = [{
-    description: 'Walking the wire',
-    completed: false,
-    index: 1,
-  },
-
-  {
-    description: 'Go to supermarket',
-    completed: false,
-    index: 2,
-  },
-
-  {
-    description: 'Visit my family',
-    completed: false,
-    index: 3,
-  },
-
-  ];
-
-  test('Delete task with index 2', () => {
-    removeTodo(todos, 2);
-    expect((todos)).toHaveLength(3);
-  });
-
-  test('Update index after task deletion', () => {
-    expect(todos[2].index).toBe(3);
-  });
+test('test the function trashTask', () => {
+  saveStorage([]);
+  addTask(newTodoInput);
+  addTask(newTodoInput);
+  trashTask(1);
+  expect(getStorage().length).toBe(1);
+  trashTask(0);
+  expect(getStorage().length).toBe(0);
 });
