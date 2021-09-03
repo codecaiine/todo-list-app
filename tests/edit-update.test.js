@@ -13,7 +13,7 @@ jest.mock('../src/checked.js');
 
 const inputList = document.createElement('input');
 inputList.type = 'text';
-inputList.value = 'Go to restaurant';
+inputList.value = 'Go to the restaurant';
 
 test('test the function editTask', () => {
   saveStorage([]);
