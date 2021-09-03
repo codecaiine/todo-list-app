@@ -5,6 +5,7 @@ const showTasks = (tasks) => {
   tasks.forEach((task) => {
     const li = document.createElement('li');
     li.className = 'list-item';
+    // li.textContent = task.description;
     li.id = task.index;
     ul.appendChild(li);
   });

@@ -13,7 +13,6 @@ const addTask = (input) => {
   taskList.push(task);
 
   saveStorage(taskList);
-  input.value = '';
   showTasks(taskList);
   return task;
 };

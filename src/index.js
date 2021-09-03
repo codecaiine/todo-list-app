@@ -3,15 +3,15 @@
 
 import './style.css';
 import check from './checked.js';
-import addTask from './addTask.js';
-import trashCompleted from './status.js';
-import trashTask from './removeTask.js';
+import addNewTask from './addTask.js';
+import removeCompleted from './status.js';
+import removeTask from './removeTask.js';
 import editTask from './editTask.js';
 import { saveStorage, getStorage } from './storage.js';
 
 const listContainer = document.querySelector('.container');
-const addTaskInput = document.querySelector('#text');
-const addTaskBtn = document.querySelector('.add');
+const addNewTaskInput = document.querySelector('#text');
+const addNewTaskBtn = document.querySelector('.add');
 const clearCompletedTask = document.querySelector('.clear');
 
 const showTasks = () => {
@@ -47,31 +47,28 @@ const showTasks = () => {
       label.style.textDecoration = tasks[i].completed === true ? 'line-through' : 'none';
       label.style.color = '#444';
 
-      const trash = document.createElement('span');
-      trash.innerHTML = "<i class='fas fa-trash-alt'></i>";
-      trash.style.display = 'flex';
-      trash.style.cursor = 'pointer';
-      trash.id = tasks.indexOf(tasks[i]);
+      const remove = document.createElement('span');
+      remove.innerHTML = "<i class='fas fa-trash-alt'></i>";
+      remove.style.display = 'flex';
+      remove.style.cursor = 'pointer';
+      remove.id = tasks.indexOf(tasks[i]);
 
       list.appendChild(listFChild);
       listFChild.appendChild(input);
       listFChild.appendChild(label);
-      listFChild.appendChild(trash);
+      listFChild.appendChild(remove);
       listContainer.appendChild(list);
 
       label.addEventListener('focus', () => {
-        trash.style.display = 'none';
-        trash.style.color = '#fff';
-        trash.style.cursor = 'pointer';
-        label.style.textDecoration = 'none';
-        list.style.backgroundColor = 'blue';
-        list.style.opacity = '0.6';
-        label.style.color = '#fff';
-        label.style.outline = 'none';
+        remove.style.display = 'none';
+        remove.style.color = '#fff';
+        remove.style.cursor = 'pointer';
+        remove.style.outline = 'none';
       });
 
       label.addEventListener('blur', (e) => {
         editTask(e.target, tasks, tasks[i]);
+        showTasks();
       });
 
       input.addEventListener('change', (e) => {
@@ -79,23 +76,24 @@ const showTasks = () => {
         saveStorage(tasks);
       });
 
-      trash.addEventListener('mousedown', (e) => {
+      remove.addEventListener('mousedown', (e) => {
         e.preventDefault();
-        trashTask(parseInt(trash.id));
+        removeTask(parseInt(remove.id));
         showTasks();
       });
     }
   }
 };
 
-addTaskBtn.addEventListener('click', (e) => {
+addNewTaskBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  addTask(addTaskInput);
+  addNewTask(addNewTaskInput);
 });
 
 clearCompletedTask.addEventListener('click', (e) => {
   e.preventDefault();
-  trashCompleted();
+  removeCompleted();
+  showTasks();
 });
 
 export default showTasks;

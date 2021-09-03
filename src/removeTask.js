@@ -1,6 +1,6 @@
 import { saveStorage, getStorage } from './storage.js';
 
-const trashTask = (taskIndex) => {
+const removeTask = (taskIndex) => {
   const storedTasks = getStorage();
 
   const currentTasks = storedTasks.filter(
@@ -14,4 +14,4 @@ const trashTask = (taskIndex) => {
   saveStorage(currentTasks);
 };
 
-export default trashTask;
+export default removeTask;
