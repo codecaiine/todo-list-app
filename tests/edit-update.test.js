@@ -13,7 +13,7 @@ jest.mock('../src/checked.js');
 
 const newTodoInput = document.createElement('input');
 newTodoInput.type = 'text';
-newTodoInput.value = 'read a book';
+newTodoInput.value = 'Go to restaurant';
 
 test('test the function editTask', () => {
   saveStorage([]);
@@ -21,9 +21,9 @@ test('test the function editTask', () => {
   const tasks = getStorage();
   const editInput = document.createElement('input');
   editInput.type = 'text';
-  editInput.textContent = 'watch a movie';
+  editInput.textContent = 'Go to the GYM';
   expect(editTask(editInput, tasks, tasks[0])).toEqual({
-    description: 'watch a movie',
+    description: 'Go to the GYM',
     completed: false,
     index: 1,
   });
