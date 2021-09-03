@@ -3,7 +3,7 @@
  */
 import editTask from '../src/editTask.js';
 import addTask from '../src/addTask.js';
-import trashCompleted from '../src/status.js';
+import removeCompleted from '../src/status.js';
 import check from '../src/checked.js';
 import { getStorage, saveStorage } from '../src/storage.js';
 
@@ -29,7 +29,7 @@ test('test the function editTask', () => {
   });
 });
 
-test('test the function trashCompleted', () => {
+test('test the function Clear all Completed tasks', () => {
   saveStorage([]);
   addTask(inputList);
   addTask(inputList);
@@ -38,7 +38,7 @@ test('test the function trashCompleted', () => {
     task.completed = true;
   });
   addTask(inputList);
-  trashCompleted();
+  removeCompleted();
   expect(getStorage().length).toBe(1);
 });
 
