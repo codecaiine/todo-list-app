@@ -2,39 +2,31 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Todo list App</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDo List App</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
 <script defer src="/todo-list-app/main.js"></script></head>
 
 <body>
-
-    <div class="wrapper-container">
-        <div class="wrapper">
-            <div class="top">
-                <h2>Today's To Do</h2>
-                <button type="submit"><i class="fas fa-sync fa-xs"></i></button>
+    <section class="form-section">
+        <form id="form" class="form-control">
+            <div class="header-wrap">
+                <h3 class="heading">ToDo App</h3>
+                <span class="syc"><i class="fas fa-sync"></i></span>
+            </div>
+            <div class="form-input">
+                <input type="text" name="text" id="text" placeholder="Add to your list..." class="italics" />
+                <button type="submit" class="add">+</button>
             </div>
 
-
-            <form id="form">
-                <input type="text" placeholder="Add to your list..." class="text">
-                <button type="submit"><i class="fa fa-reply"></i></button>
-            </form>
-
-            <ul id="todoList">
-
+            <ul class="container">
             </ul>
-
-            <footer>
-                <span class="clear-completed">Clear all completed</span>
-            </footer>
-
-        </div>
-
-    </div>
-
+            <div class="clear">
+                <a href="#">Clear all completed task</a>
+            </div>
+        </form>
+    </section>
 </body>
 
 </html>

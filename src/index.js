@@ -1,57 +1,103 @@
+/* eslint-disable radix */
 /* eslint-disable import/no-cycle */
+
 import './style.css';
-import showTasks from './showTodos.js';
-import { saveTodoInLocalStorage } from './setLocalStorage.js';
-import getTasksFromLocalStorage from './getTodos.js';
-import removeTodo from './remove.js';
-import removeCompletedTasks from './clearTodos.js';
+import check from './checked.js';
+import addTask from './addTask.js';
+import trashCompleted from './status.js';
+import trashTask from './removeTask.js';
+import editTask from './editTask.js';
+import { saveStorage, getStorage } from './storage.js';
 
-const input = document.querySelector('.text');
-const form = document.getElementById('form');
-const removeCompleted = document.querySelector('.clear-completed');
+const listContainer = document.querySelector('.container');
+const addTaskInput = document.querySelector('#text');
+const addTaskBtn = document.querySelector('.add');
+const clearCompletedTask = document.querySelector('.clear');
 
-function clearInput() {
-  input.value = '';
-}
+const showTasks = () => {
+  while (listContainer.lastChild) {
+    listContainer.removeChild(listContainer.lastChild);
+  }
 
-// Add Task
+  const tasks = getStorage();
 
-const addTodoTask = (e) => {
-  const tasks = getTasksFromLocalStorage();
+  if (tasks != null) {
+    for (let i = 0; i < tasks.length; i += 1) {
+      const list = document.createElement('li');
+      list.classList.add('list');
+      list.id = tasks[i].index;
+      list.draggable = true;
+
+      const listFChild = document.createElement('div');
+      listFChild.classList.add('div1');
+
+      const input = document.createElement('input');
+      input.classList.add('check');
+      input.type = 'checkbox';
+      input.name = 'check1';
+
+      if (tasks[i].completed) {
+        input.checked = true;
+      }
+
+      const label = document.createElement('label');
+      label.contentEditable = true;
+      label.classList.add('label');
+      label.innerHTML = tasks[i].description;
+      label.style.textDecoration = tasks[i].completed === true ? 'line-through' : 'none';
+      label.style.color = '#444';
+
+      const trash = document.createElement('span');
+      trash.innerHTML = "<i class='fas fa-trash-alt'></i>";
+      trash.style.display = 'flex';
+      trash.style.cursor = 'pointer';
+      trash.id = tasks.indexOf(tasks[i]);
+
+      list.appendChild(listFChild);
+      listFChild.appendChild(input);
+      listFChild.appendChild(label);
+      listFChild.appendChild(trash);
+      listContainer.appendChild(list);
+
+      label.addEventListener('focus', () => {
+        trash.style.display = 'none';
+        trash.style.color = '#fff';
+        trash.style.cursor = 'pointer';
+        label.style.textDecoration = 'none';
+        list.style.backgroundColor = 'blue';
+        list.style.opacity = '0.6';
+        label.style.color = '#fff';
+        label.style.outline = 'none';
+      });
+
+      label.addEventListener('blur', (e) => {
+        editTask(e.target, tasks, tasks[i]);
+      });
+
+      input.addEventListener('change', (e) => {
+        check(e.target, tasks[i]);
+        saveStorage(tasks);
+      });
+
+      trash.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        trashTask(parseInt(trash.id));
+        showTasks();
+      });
+    }
+  }
+};
+
+addTaskBtn.addEventListener('click', (e) => {
   e.preventDefault();
-
-  if (input.value === '') {
-    return;
-  }
-
-  const todo = {
-    description: input.value,
-    completed: false,
-    index: tasks.length + 1,
-  };
-
-  clearInput();
-  saveTodoInLocalStorage(todo);
-  showTasks();
-};
-
-const setIndex = (tasks) => {
-  for (let i = 0; i < tasks.length; i += 1) {
-    tasks[i].index = i + 1;
-  }
-};
-
-form.addEventListener('submit', addTodoTask);
-
-const myTodoList = document.getElementById('todoList');
-myTodoList.addEventListener('click', (event) => {
-  if (event.target.classList.contains('delete-task')) {
-    const listKey = event.target.parentElement.parentElement.dataset.key;
-    removeTodo(listKey);
-  }
+  addTask(addTaskInput);
 });
-removeCompleted.addEventListener('click', removeCompletedTasks);
 
-showTasks();
+clearCompletedTask.addEventListener('click', (e) => {
+  e.preventDefault();
+  trashCompleted();
+});
 
-export default setIndex;
+export default showTasks;
+
+window.onload = showTasks;
