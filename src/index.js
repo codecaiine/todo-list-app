@@ -3,15 +3,15 @@
 
 import './style.css';
 import check from './checked.js';
-import addNewTask from './addTask.js';
+import addTask from './addTask.js';
 import removeCompleted from './status.js';
 import removeTask from './removeTask.js';
 import editTask from './editTask.js';
 import { saveStorage, getStorage } from './storage.js';
 
 const listContainer = document.querySelector('.container');
-const addNewTaskInput = document.querySelector('#text');
-const addNewTaskBtn = document.querySelector('.add');
+const addTaskInput = document.querySelector('#text');
+const addTaskBtn = document.querySelector('.add');
 const clearCompletedTask = document.querySelector('.clear');
 
 const showTasks = () => {
@@ -85,9 +85,9 @@ const showTasks = () => {
   }
 };
 
-addNewTaskBtn.addEventListener('click', (e) => {
+addTaskBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  addNewTask(addNewTaskInput);
+  addTask(addTaskInput);
 });
 
 clearCompletedTask.addEventListener('click', (e) => {

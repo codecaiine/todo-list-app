@@ -67,8 +67,7 @@ Give a ⭐️ if you like this project!
 - Thanks to Microverse
 - Kossi Fioklou
 - Yannick AKA
-- Adedamola Shittu
-- Zeenat Lawal
+- Amine Smahi
 
 ## 📝 License
 
