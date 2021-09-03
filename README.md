@@ -1,6 +1,6 @@
 # Testing To Do list: Part 2
 
-In this part of the testing project, you will test functions responsible for the status and content updates. You will also test the order re-position of items in the list upon drag/drop actions.
+In this part of the testing project part 2, you will test functions responsible for the status and content updates. You will also test the order re-position of items in the list upon drag/drop actions.
 
 
 ![screenshot](./src/demoiii.PNG)
