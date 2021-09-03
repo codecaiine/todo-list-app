@@ -11,13 +11,13 @@ jest.mock('../src/storage.js');
 jest.mock('../src/index.js');
 jest.mock('../src/checked.js');
 
-const newTodoInput = document.createElement('input');
-newTodoInput.type = 'text';
-newTodoInput.value = 'Go to restaurant';
+const inputList = document.createElement('input');
+inputList.type = 'text';
+inputList.value = 'Go to restaurant';
 
 test('test the function editTask', () => {
   saveStorage([]);
-  addTask(newTodoInput);
+  addTask(inputList);
   const tasks = getStorage();
   const editInput = document.createElement('input');
   editInput.type = 'text';
@@ -31,13 +31,13 @@ test('test the function editTask', () => {
 
 test('test the function trashCompleted', () => {
   saveStorage([]);
-  addTask(newTodoInput);
-  addTask(newTodoInput);
-  addTask(newTodoInput);
+  addTask(inputList);
+  addTask(inputList);
+  addTask(inputList);
   getStorage().forEach((task) => {
     task.completed = true;
   });
-  addTask(newTodoInput);
+  addTask(inputList);
   trashCompleted();
   expect(getStorage().length).toBe(1);
 });
@@ -47,9 +47,9 @@ describe('test the function check', () => {
   checkbox.type = checkbox;
   checkbox.checked = false;
   saveStorage([]);
-  addTask(newTodoInput);
-  addTask(newTodoInput);
-  addTask(newTodoInput);
+  addTask(inputList);
+  addTask(inputList);
+  addTask(inputList);
   getStorage().forEach((task) => {
     task.completed = true;
   });
@@ -59,7 +59,7 @@ describe('test the function check', () => {
     expect(tasks[0].completed).toBeFalsy();
   });
   test("test the last task if it's checked ", () => {
-    addTask(newTodoInput);
+    addTask(inputList);
     const tasks = getStorage();
     checkbox.checked = true;
     check(checkbox, tasks[tasks.length - 1]);
