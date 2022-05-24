@@ -9,7 +9,7 @@ In this project, you will implement the CRUD (create, update, delete) methods. A
 
 ## Live Demo
 
-[Live Demo Link](https://codecaiine.github.io/todo-list-app/)
+[Live Demo Link](todo-list-akaa.netlify.app)
  
 ## Built 
 - HTML
