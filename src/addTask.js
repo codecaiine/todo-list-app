@@ -1,8 +1,9 @@
 /* eslint-disable import/no-cycle */
-import { saveStorage, getStorage } from './storage.js';
-import showTasks from './index.js';
 
-const addTask = (input) => {
+import { getStorage, saveStorage } from './storage.js';
+import populateList from './index.js';
+
+const addNewTask = (input) => {
   const taskList = getStorage();
   const task = {
     index: taskList.length + 1,
@@ -10,11 +11,15 @@ const addTask = (input) => {
     description: input.value,
   };
 
+  if (input.value === '') {
+    return;
+  }
   taskList.push(task);
-
   saveStorage(taskList);
-  showTasks(taskList);
-  return task;
+
+  input.value = '';
+
+  populateList();
 };
 
-export default addTask;
+export default addNewTask;
