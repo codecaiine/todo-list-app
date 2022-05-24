@@ -1,7 +1,6 @@
 import showTasks from './showTodos.js';
 import { setLocalStorage } from './setLocalStorage.js';
 import getTasksFromLocalStorage from './getTodos.js';
-// eslint-disable-next-line import/no-cycle
 import setIndex from './index.js';
 
 const removeTodo = (key) => {

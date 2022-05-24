@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import './style.css';
 import showTasks from './showTodos.js';
 import { saveTodoInLocalStorage } from './setLocalStorage.js';

@@ -1,5 +1,3 @@
-/* eslint-disable import/no-cycle */
-
 import populateList from './index.js';
 import { saveStorage } from './storage.js';
 
