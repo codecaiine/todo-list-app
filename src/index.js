@@ -2,9 +2,9 @@
 /* eslint-disable import/no-cycle */
 
 import './style.css';
-import check from './checked.js';
+import check from './check.js';
 import addTask from './addTask.js';
-import removeCompleted from './status.js';
+import trashCompleted from './completed.js';
 import removeTask from './removeTask.js';
 import editTask from './editTask.js';
 import { saveStorage, getStorage } from './storage.js';
@@ -14,7 +14,7 @@ const addTaskInput = document.querySelector('#text');
 const addTaskBtn = document.querySelector('.add');
 const clearCompletedTask = document.querySelector('.clear');
 
-const showTasks = () => {
+const populateList = () => {
   while (listContainer.lastChild) {
     listContainer.removeChild(listContainer.lastChild);
   }
@@ -22,10 +22,10 @@ const showTasks = () => {
   const tasks = getStorage();
 
   if (tasks != null) {
-    for (let i = 0; i < tasks.length; i += 1) {
+    tasks.forEach((task) => {
       const list = document.createElement('li');
       list.classList.add('list');
-      list.id = tasks[i].index;
+      list.id = task.index;
       list.draggable = true;
 
       const listFChild = document.createElement('div');
@@ -36,52 +36,64 @@ const showTasks = () => {
       input.type = 'checkbox';
       input.name = 'check1';
 
-      if (tasks[i].completed) {
+      if (task.completed) {
         input.checked = true;
       }
 
       const label = document.createElement('label');
       label.contentEditable = true;
       label.classList.add('label');
-      label.innerHTML = tasks[i].description;
-      label.style.textDecoration = tasks[i].completed === true ? 'line-through' : 'none';
+      label.innerHTML = task.description;
+      label.style.textDecoration = task.completed === true ? 'line-through' : 'none';
       label.style.color = '#444';
+      const span = document.createElement('span');
+      span.classList.add('dot');
 
-      const remove = document.createElement('span');
-      remove.innerHTML = "<i class='fas fa-trash-alt'></i>";
-      remove.style.display = 'flex';
-      remove.style.cursor = 'pointer';
-      remove.id = tasks.indexOf(tasks[i]);
+      const dot = document.createElement('i');
+      dot.className += 'fas fa-ellipsis-v';
 
+      const trash = document.createElement('span');
+      trash.innerHTML = "<i class='fas fa-trash-alt'></i>";
+      trash.style.display = 'none';
+      trash.id = tasks.indexOf(task);
+
+      span.appendChild(dot);
       list.appendChild(listFChild);
-      listFChild.appendChild(input);
-      listFChild.appendChild(label);
-      listFChild.appendChild(remove);
       listContainer.appendChild(list);
 
-      label.addEventListener('focus', () => {
-        remove.style.display = 'none';
-        remove.style.color = '#fff';
-        remove.style.cursor = 'pointer';
-        remove.style.outline = 'none';
+      const children = [input, label, span, trash];
+      children.forEach((child) => {
+        listFChild.appendChild(child);
       });
 
+      label.addEventListener('focus', () => {
+        span.style.display = 'none';
+        trash.style.display = 'flex';
+        trash.style.color = '#fff';
+        trash.style.cursor = 'pointer';
+        label.style.textDecoration = 'none';
+        list.style.backgroundColor = 'blue';
+        list.style.opacity = '0.6';
+        label.style.color = '#fff';
+        label.style.outline = 'none';
+
+        trash.addEventListener('mousedown', (e) => {
+          e.preventDefault();
+          removeTask(parseInt(trash.id));
+        });
+      });
       label.addEventListener('blur', (e) => {
-        editTask(e.target, tasks, tasks[i]);
-        showTasks();
+        span.style.display = 'flex';
+        trash.style.display = 'none';
+
+        editTask(e.target, tasks, task);
       });
 
       input.addEventListener('change', (e) => {
-        check(e.target, tasks[i]);
+        check(e.target, task);
         saveStorage(tasks);
       });
-
-      remove.addEventListener('mousedown', (e) => {
-        e.preventDefault();
-        removeTask(parseInt(remove.id));
-        showTasks();
-      });
-    }
+    });
   }
 };
 
@@ -92,10 +104,9 @@ addTaskBtn.addEventListener('click', (e) => {
 
 clearCompletedTask.addEventListener('click', (e) => {
   e.preventDefault();
-  removeCompleted();
-  showTasks();
+  trashCompleted();
 });
 
-export default showTasks;
+export default populateList;
 
-window.onload = showTasks;
+window.onload = populateList;
