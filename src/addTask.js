@@ -3,7 +3,7 @@
 import { getStorage, saveStorage } from './storage.js';
 import populateList from './index.js';
 
-const addNewTask = (input) => {
+const addTask = (input) => {
   const taskList = getStorage();
   const task = {
     index: taskList.length + 1,
@@ -22,4 +22,4 @@ const addNewTask = (input) => {
   populateList();
 };
 
-export default addNewTask;
+export default addTask;

@@ -5,7 +5,7 @@ import './style.css';
 import check from './check.js';
 import addNewTask from './addlist.js';
 import trashCompleted from './completed.js';
-import trashTask from './trashTask.js';
+import removeTask from './removeTask.js';
 import editTask from './editTask.js';
 import { saveStorage, getStorage } from './storage.js';
 
@@ -79,7 +79,7 @@ const populateList = () => {
 
         trash.addEventListener('mousedown', (e) => {
           e.preventDefault();
-          trashTask(parseInt(trash.id));
+          removeTask(parseInt(trash.id));
         });
       });
       label.addEventListener('blur', (e) => {
